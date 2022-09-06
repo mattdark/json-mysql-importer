@@ -1,6 +1,6 @@
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, ForeignKeyConstraint
 
-engine = create_engine('mysql+pymysql://root:12345@10.194.44.250/movienet', pool_recycle=3600)
+engine = create_engine('mysql+pymysql://user:pass@host/movienet', pool_recycle=3600)
 
 meta = MetaData(bind=engine)
 MetaData.reflect(meta)
