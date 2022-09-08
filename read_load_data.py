@@ -55,8 +55,14 @@ def load_data(df):
                     genre = Genre(Genre_Dict[val], val)
                     movie.genres.append(genre)
 
-        if row.director != [None]:
-            for data in row.director or []:
+        if row.director != [None] and row.director != None:
+            done = set()
+            w = []
+            for d in row.director:
+                if d['id'] not in done:
+                    done.add(d['id'])
+                    w.append(d)
+            for data in w or []:
                 director = Director(data['id'], data['name'])
                 session.merge(director)
                 session.flush()
