@@ -1,75 +1,102 @@
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, String, ForeignKey, ForeignKeyConstraint
+from sqlalchemy import Column, String, Integer, Table, ForeignKey, ForeignKeyConstraint
+from sqlalchemy.orm import relationship
 
-engine = create_engine('mysql+pymysql://user:pass@host/movienet', pool_recycle=3600)
+from .base import Base
 
-meta = MetaData(bind=engine)
-MetaData.reflect(meta)
+class Country(Base):
+    __tablename__ = 'countries'
 
-countries = Table(
-    'countries', meta,
-    Column('country_id', Integer, primary_key=True, nullable=False),
-    Column('name', String(45), nullable=False)
-)
+    country_id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String(45), nullable=False)
 
-movies = Table(
-    'movies', meta,
-    Column('movie_id', String(15), primary_key=True, nullable=False),
-    Column('title', String(250), nullable=False),
-    Column('country', Integer, ForeignKey("countries.country_id"), nullable=True)
-)
+    def __init__(self, country_id, name):
+        self.country_id = country_id
+        self.name = name
 
-genres = Table (
-    'genres', meta,
-    Column('genre_id', Integer, primary_key=True, nullable=False),
-    Column('name', String(45), nullable=False)
-)
+class Genre(Base):
+    __tablename__ = 'genres'
+    
+    genre_id = Column(Integer, primary_key=True, nullable=False)
+    name = Column(String(45), nullable=False)
 
-movie_genres = Table (
-    'movie_genres', meta,
+    def __init__(self, genre_id, name):
+        self.genre_id = genre_id
+        self.name = name
+
+movies_genres = Table (
+    'movies_genres', Base.metadata,
     Column('movie_id', String(15), primary_key=True, nullable=False),
     Column('genre_id', Integer, primary_key=True, nullable=False),
     ForeignKeyConstraint(['movie_id'], ['movies.movie_id']),
     ForeignKeyConstraint(['genre_id'], ['genres.genre_id'])
 )
 
-director = Table(
-    'director', meta,
-    Column('director_id', String(15), primary_key=True, nullable=False),
-    Column('name', String(45), nullable=False)
+movies_actors = Table(
+    'movies_actors', Base.metadata,
+    Column('movie_id', String(15), primary_key=True, nullable=False),
+    Column('actor_id', String(15), primary_key=True, nullable=False),
+    ForeignKeyConstraint(['movie_id'], ['movies.movie_id']),
+    ForeignKeyConstraint(['actor_id'], ['actors.actor_id'])
 )
 
-cast = Table(
-    'cast', meta,
-    Column('cast_id', String(15), primary_key=True, nullable=False),
-    Column('name', String(45), nullable=False)
-)
-
-writers = Table(
-    'writers', meta,
-    Column('writer_id', String(15), primary_key=True, nullable=False),
-    Column('name', String(45), nullable=False)
-)
-
-movie_director = Table (
-    'movie_director', meta,
+movies_directors = Table (
+    'movies_directors', Base.metadata,
     Column('movie_id', String(15), primary_key=True, nullable=False),
     Column('director_id', String(15), primary_key=True, nullable=False),
     ForeignKeyConstraint(['movie_id'], ['movies.movie_id']),
-    ForeignKeyConstraint(['director_id'], ['director.director_id'])
+    ForeignKeyConstraint(['director_id'], ['directors.director_id'])
 )
 
-movie_cast = Table (
-    'movie_cast', meta,
-    Column('movie_id', String(15), primary_key=True, nullable=False),
-    Column('cast_id', String(15), primary_key=True, nullable=False),
-    ForeignKeyConstraint(['movie_id'], ['movies.movie_id']),
-    ForeignKeyConstraint(['cast_id'], ['cast.cast_id'])
-)
-
-movie_writers = Table (
-    'movie_writers', meta,
+movies_writers = Table (
+    'movies_writers', Base.metadata,
     Column('movie_id', String(15), primary_key=True, nullable=False),
     Column('writer_id', String(15), primary_key=True, nullable=False),
     ForeignKeyConstraint(['movie_id'], ['movies.movie_id']),
     ForeignKeyConstraint(['writer_id'], ['writers.writer_id'])
 )
+
+class Movie(Base):
+    __tablename__ = 'movies'
+    
+    movie_id = Column(String(15), primary_key=True, nullable=False)
+    title = Column(String(250), nullable=False)
+    country = Column(Integer, ForeignKey('countries.country_id'), nullable=True)
+    genres = relationship("Genre", secondary=movies_genres)
+    directors = relationship("Director", secondary=movies_directors)
+    actors = relationship("Actor", secondary=movies_actors)
+    writers = relationship("Writer", secondary=movies_writers)
+
+    def __init__(self, movie_id, title, country):
+        self.movie_id = movie_id
+        self.title = title
+        self.country = country
+
+class Director(Base):
+    __tablename__ = 'directors'
+    
+    director_id = Column(String(15), primary_key=True, nullable=False)
+    name = Column(String(45), nullable=False)
+    
+    def __init__(self, director_id, name):
+        self.director_id = director_id
+        self.name = name
+
+class Actor(Base):
+    __tablename__ = 'actors'
+    
+    actor_id = Column(String(15), primary_key=True, nullable=False)
+    name = Column(String(100), nullable=False)
+    
+    def __init__(self, actor_id, name):
+        self.actor_id = actor_id
+        self.name = name
+
+class Writer(Base):
+    __tablename__ = 'writers'
+    
+    writer_id = Column(String(15), primary_key=True, nullable=False)
+    name = Column(String(45), nullable=False)
+    
+    def __init__(self, writer_id, name):
+        self.writer_id = writer_id
+        self.name = name
