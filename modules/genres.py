@@ -1,4 +1,4 @@
-Genre = {
+Genre_Dict = {
     'Western' : 1,
     'Drama' : 2,
     'Comedy' : 3,

@@ -1,4 +1,4 @@
-Country = {
+Country_Dict = {
     'USA' : 1,
     'Canada' : 2,
     'South Africa' : 3,
