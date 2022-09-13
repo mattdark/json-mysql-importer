@@ -1,1 +1,5 @@
+
 pandas
+sqlalchemy
+PyMySQL
+tqdm
