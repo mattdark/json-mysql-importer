@@ -36,10 +36,24 @@ Install percona-server-server, the package that provides the Percona Server for 
 $ sudo apt install percona-server-server
 ```
 
-
+MySQL Shell is also recommended to be installed.
 
 ```
-$ sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
+$ sudo apt install percona-mysql-shell
+```
+
+After installing, make sure MySQL is running.
+
+During installation, `root` password is assigned. You can log into MySQL with this user or create a new one. Also, `movienet` database must be created.
+```
+$ mysqlsh root@localhost
+```
+
+Replace `root` with your user if necessary, and specify IP address or URL for your MySQL server instance if needed.
+
+Change to SQL mode:
+```
+create database movienet;
 ```
 
 ### Conda
@@ -70,8 +84,6 @@ git clone https://github.com/mattdark/json-mysql-importer.git
 
 #### Conda
 When you clone this repository to your local development environment, you will find an environment.yml file that contains information about the Python version and dependencies required by this project. This file is used by Conda to configure the virtual environment and install dependencies.
-
-
 
 After installing Anaconda, change to the `json-mysql-importer` directory:
 ```
