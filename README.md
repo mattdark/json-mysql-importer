@@ -5,21 +5,38 @@ A Python app that imports data from a dataset (JSON) into a MySQL DB
 
 ## Prerequisites
 ### MySQL
+While this script could work with any MySQL variant, tests were run on Percona Server for MySQL. If you already have MySQL running on your system, skip this step.
+
+For installing Percona Server for MySQL from the repositories on Debian and Ubuntu, follow the instructions below. For other operating systems check the [documentation](https://docs.percona.com/percona-server/latest/installation.html).
+
+Before installing Percona Server for MySQL, make sure `curl` and `gnupg2` are installed.
 ```
 $ sudo apt install gnupg2 curl
 ```
 
+Then, install `percona-release`, a tool that allows users to automatically configure which Percona Software repositories are enabled or disabled.
+
+Get the repository package:
 ```
 $ wget https://repo.percona.com/apt/percona-release_latest.$(lsb_release -sc)_all.deb
 ```
 
+Install the downloaded package with dpkg:
+```
+$ sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
+```
+
+Enable the ps80 repository:
 ```
 $ sudo percona-release setup ps80
 ```
 
+Install percona-server-server, the package that provides the Percona Server for MySQL:
 ```
 $ sudo apt install percona-server-server
 ```
+
+
 
 ```
 $ sudo dpkg -i percona-release_latest.$(lsb_release -sc)_all.deb
