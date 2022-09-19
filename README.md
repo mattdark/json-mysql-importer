@@ -45,14 +45,18 @@ $ sudo apt install percona-mysql-shell
 After installing, make sure MySQL is running.
 
 During installation, `root` password is assigned. You can log into MySQL with this user or create a new one. Also, `movienet` database must be created.
+
+Log into MySQL using MySQL Shell:
+
 ```
 $ mysqlsh root@localhost
 ```
 
-Replace `root` with your user if necessary, and specify IP address or URL for your MySQL server instance if needed.
+Replace `root` with your user if necessary, and replace `localhost` with the IP address or URL for your MySQL server instance if needed.
 
-Change to SQL mode:
+Change to SQL mode and create the `movienet` database:
 ```
+\sql
 create database movienet;
 ```
 
@@ -80,7 +84,7 @@ git clone https://github.com/mattdark/json-mysql-importer.git
 ```
 
 ### Configure your Python environment
-### virtualenv and pip
+#### virtualenv and pip
 
 #### Conda
 When you clone this repository to your local development environment, you will find an environment.yml file that contains information about the Python version and dependencies required by this project. This file is used by Conda to configure the virtual environment and install dependencies.
@@ -101,6 +105,21 @@ Once the environment is created, you can activate it by running:
 ```
 $ conda activate percona
 ```
+### Download Dataset
+A copy of the [MovieNet](https://movienet.github.io/) dataset is required for running this script. Signing in to [OpenDataLab](https://opendatalab.com/) using your Google or GitHub account, go to the [download](https://opendatalab.com/MovieNet/download) section and get the `.zip` file inside the `Meta` directory. Every entry in this dataset is a JSON file that contains information about every movie. Unzip the file and copy the JSONs to a `datasets` directory inside `json-mysql-converter`.
 
+### Running the script
 Before running the script, don't forget to set `user`, `password` and `host` in the `base.py` module, required for connecting to your MySQL DB.
 
+After setting up authentication details in the `base.py` module, run the Python script:
+```
+$ python read_load_data.py
+```
+
+This script will do the follow:
+* Generate database schema from `schema.py` module.
+* Insert `Country_Dict` and `Genre_Dict` values into `countries` and `genres` tables from `movienet` database.
+* Create DataFrame from JSON files in the `MovieNet` dataframe.
+* Insert values from dataframe into `movienet` database.
+
+A progress bar was added using tqdm.
