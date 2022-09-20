@@ -131,7 +131,7 @@ Executing time of the `read_load_data.py` script will depend on CPU.
 
 <div align="center">
   <a href="https://github.com/mattdark/json-mysql-importer">
-    <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python Logo">
+    <img src="https://www.python.org/static/community_logos/python-logo-generic.svg" alt="Python Logo">
   </a>
 </div>
 
@@ -351,15 +351,15 @@ Use this space to list resources you find helpful and would like to give credit 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/mattdark/json-mysql-importer.svg?style=for-the-badge
 [contributors-url]: https://github.com/mattdark/json-mysql-importer/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/mattdark/json-mysql-importer.svg?style=for-the-badge
 [forks-url]: https://github.com/mattdark/json-mysql-importer/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/mattdark/json-mysql-importer.svg?style=for-the-badge
 [stars-url]: https://github.com/mattdark/json-mysql-importer/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/mattdark/json-mysql-importer.svg?style=for-the-badge
 [issues-url]: https://github.com/mattdark/json-mysql-importer/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/mattdark/json-mysql-importer.svg?style=for-the-badge
 [license-url]: https://github.com/mattdark/json-mysql-importer/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/mariogmd
