@@ -1,5 +1,5 @@
 
-# JSON to MySQL Importer
+# Importing from JSON to MySQL
 To read and analyze a dataset like the provided by the [MovieNet](https://movienet.github.io/) project, you can use [Pandas](https://pandas.pydata.org/). This Python library, used for data analysis, supports the reading of the following file types:
 
 * CSV Files
@@ -70,9 +70,7 @@ def create_dataframe(filepath):
 
     json_list = []
     for file in tqdm(file_list, desc='Creating DataFrame'):
-    #for i in tqdm(range(2000), desc='Creating DataFrame'):
         with open (file) as f:
-        #with open(file_list[i]) as f:
             exp = json.load(f)
             json_list.append(exp)
 
