@@ -1,7 +1,61 @@
 
 # JSON to MySQL Importer
-A Python app that imports data from a dataset (JSON) into a MySQL DB
+[MovieNet](https://movienet.github.io/) is a holistic dataset for movie understanding. It contains the meta information of the movies from IMDB and TMDB, including:
+* Title
+* Genre
+* Country
+* Director
+* Writer
+* Cast
 
+Using Pandas, a dataframe will be created from the more than 375 thousand JSON files that represent the meta information of the movies. This will permit that information can be read and analyzed. Every entry in this dataset has the following content:
+
+<details>
+  <summary><b>JSON</b> (click to expand)</summary>
+
+{
+  "imdb_id": "tt0000001",
+  "tmdb_id": null,
+  "douban_id": null,
+  "title": "Carmencita (1894)",
+  "genres": [
+    "Documentary",
+    "Short"
+  ],
+  "country": "USA",
+  "version": [
+    {
+      "runtime": "1 min",
+      "description": ""
+    }
+  ],
+  "imdb_rating": null,
+  "director": [
+    {
+      "id": "nm0005690",
+      "name": "William K.L. Dickson"
+    }
+  ],
+  "writer": null,
+  "cast": [
+    {
+      "id": "nm1588970",
+      "name": "Carmencita",
+      "character": "Herself"
+    }
+  ],
+  "overview": null,
+  "storyline": "Presumably, the first woman ever to appear in a Kinetoscope film and possibly the first woman to take part in a motion picture in the United States, the Spaniard dancer, Carmencita, performs her appealing high-kick dance in front of the camera of William K.L. Dickson and William Heise, for Thomas Edison. In this segment of her New York music-hall act, she spins and twirls, exhibiting an admirable talent, a fashionable dress, and a really charming smile.",
+  "plot": null,
+  "synopsis": null
+}
+</details>
+
+After reading and analysing the dataset, this information will be imported into a MySQL DB using [SQLAlchemy](https://www.sqlalchemy.org/).
+
+Schema definition is specified in the `schema.py` module. This information is required by SQLAlchemy to create the tables in the `movienet` database.
+
+Executing time of the `read_load_data.py` script will depend on CPU.
 
 ## Prerequisites
 ### MySQL
@@ -119,7 +173,7 @@ $ python read_load_data.py
 This script will do the follow:
 * Generate database schema from `schema.py` module.
 * Insert `Country_Dict` and `Genre_Dict` values into `countries` and `genres` tables from `movienet` database.
-* Create DataFrame from JSON files in the `MovieNet` dataframe.
+* Create DataFrame from JSON files in the `MovieNet` dataset.
 * Insert values from dataframe into `movienet` database.
 
 A progress bar was added using tqdm.
