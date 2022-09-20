@@ -13,6 +13,7 @@ Using Pandas, a dataframe will be created from the more than 375 thousand JSON f
 <details>
   <summary><b>JSON</b> (click to expand)</summary>
 
+```
 {
   "imdb_id": "tt0000001",
   "tmdb_id": null,
@@ -49,6 +50,7 @@ Using Pandas, a dataframe will be created from the more than 375 thousand JSON f
   "plot": null,
   "synopsis": null
 }
+```
 </details>
 
 After reading and analysing the dataset, this information will be imported into a MySQL DB using [SQLAlchemy](https://www.sqlalchemy.org/).
