@@ -1,3 +1,29 @@
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#importing-from-json-to-mysql">Importing from JSON to MySQL</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#clone-this-repository">Clone this repository</a></li>
+        <li><a href="#configure-your-python-environment">Configure your Python environment</a></li>
+        <li><a href="#download-dataset">Download Dataset</a></li>
+        <li><a href="#running-the-script">Running the script</a></li>
+      </ul>
+    </li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <!--<li><a href="#acknowledgments">Acknowledgments</a></li>-->
+  </ol>
+</details>
 
 # Importing from JSON to MySQL
 To read and analyze a dataset like the provided by the [MovieNet](https://movienet.github.io/) project, you can use [Pandas](https://pandas.pydata.org/). This Python library, used for data analysis, supports the reading of the following file types:
@@ -140,6 +166,7 @@ Change to SQL mode and create the `movienet` database:
 \sql
 create database movienet;
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Conda
 Before running the Python script that imports the data into a MySQL DB, you must install Conda through Anaconda or Miniconda. [Here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda) you can find more information on which one is better for you.
@@ -157,6 +184,8 @@ It will prompt you to confirm some configuration details:
 * Accepting license
 * Confirming installation folder
 * Initializing Anaconda (by the installer)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 ### Clone this repository
@@ -186,8 +215,12 @@ Once the environment is created, you can activate it by running:
 ```
 $ conda activate percona
 ```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ### Download Dataset
 A copy of the [MovieNet](https://movienet.github.io/) dataset is required for running this script. Signing in to [OpenDataLab](https://opendatalab.com/) using your Google or GitHub account, go to the [download](https://opendatalab.com/MovieNet/download) section and get the `.zip` file inside the `Meta` directory. Every entry in this dataset is a JSON file that contains information about every movie. Unzip the file and copy the JSONs to a `datasets` directory inside `json-mysql-converter`.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Running the script
 Before running the script, don't forget to set `user`, `password` and `host` in the `base.py` module, required for connecting to your MySQL DB.
@@ -204,6 +237,8 @@ This script will do the follow:
 * Insert values from dataframe into `movienet` database.
 
 A progress bar was added using tqdm.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -257,7 +292,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Mario García - [@your_twitter](https://twitter.com/mariogmd) - mario.garcia@percona.com
+Mario García - [@mariogmd](https://twitter.com/mariogmd) - mario.garcia@percona.com
 
 Project Link: [https://github.com/mattdark/json-mysql-importer](https://github.com/mattdark/json-mysql-importer)
 
