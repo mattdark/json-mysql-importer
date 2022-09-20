@@ -1,6 +1,15 @@
 
 # JSON to MySQL Importer
-[MovieNet](https://movienet.github.io/) is a holistic dataset for movie understanding. It contains the meta information of the movies from IMDB and TMDB, including:
+To read and analyze a dataset like the provided by the [MovieNet](https://movienet.github.io/) project, you can use [Pandas](https://pandas.pydata.org/). This Python library, used for data analysis, supports the reading of the following file types:
+
+* CSV Files
+* JSON Files
+* HTML Files
+* Excel Files
+* SQL Files
+* Pickle Files
+
+The `MovieNet` dataset was created for movie understanding. It contains the meta information of the movies from IMDB and TMDB, including:
 * Title
 * Genre
 * Country
@@ -8,7 +17,7 @@
 * Writer
 * Cast
 
-Using Pandas, a dataframe will be created from the more than 375 thousand JSON files that represent the meta information of the movies. This will permit that information can be read and analyzed. Every entry in this dataset has the following content:
+Every entry in this dataset is a JSON file, and has the following content:
 
 <details>
   <summary><b>JSON</b> (click to expand)</summary>
@@ -52,6 +61,24 @@ Using Pandas, a dataframe will be created from the more than 375 thousand JSON f
 }
 ```
 </details>
+
+Using Pandas, a dataframe will be created from the more than 375 thousand JSON files that represent the meta information of the movies. This will permit that information can be read and analyzed.
+```python
+def create_dataframe(filepath):
+    json_pattern = os.path.join(filepath, '*.json')
+    file_list = glob(json_pattern)
+
+    json_list = []
+    for file in tqdm(file_list, desc='Creating DataFrame'):
+    #for i in tqdm(range(2000), desc='Creating DataFrame'):
+        with open (file) as f:
+        #with open(file_list[i]) as f:
+            exp = json.load(f)
+            json_list.append(exp)
+
+    df = pd.DataFrame(json_list)
+    return df
+```
 
 After reading and analysing the dataset, this information will be imported into a MySQL DB using [SQLAlchemy](https://www.sqlalchemy.org/).
 
