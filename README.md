@@ -1,3 +1,18 @@
+<!-- PROJECT SHIELDS -->
+<!--
+*** I'm using markdown "reference style" links for readability.
+*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
+*** See the bottom of this document for the declaration of the reference variables
+*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
+*** https://www.markdownguide.org/basic-syntax/#reference-style-links
+-->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -109,6 +124,22 @@ After reading and analysing the dataset, this information will be imported into 
 Schema definition is specified in the `schema.py` module. This information is required by SQLAlchemy to create the tables in the `movienet` database.
 
 Executing time of the `read_load_data.py` script will depend on CPU.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Built With
+
+<div align="center">
+  <a href="https://github.com/mattdark/json-mysql-importer">
+    <img src="https://www.python.org/static/community_logos/python-logo.png" alt="Python Logo">
+  </a>
+</div>
+
+* [pandas](https://pandas.pydata.org/)
+* [SQLAlchemy](https://sqlalchemy.org/)
+* [tqdm](https://github.com/tqdm/tqdm)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Prerequisites
 ### MySQL
@@ -317,3 +348,18 @@ Use this space to list resources you find helpful and would like to give credit 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 -->
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/mattdark/json-mysql-importer/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
+[forks-url]: https://github.com/mattdark/json-mysql-importer/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/mattdark/json-mysql-importer/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/mattdark/json-mysql-importer/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
+[license-url]: https://github.com/mattdark/json-mysql-importer/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/mariogmd
