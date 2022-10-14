@@ -9,6 +9,9 @@ from tqdm import tqdm
 import os
 import json
 from glob import glob
+import numpy as np
+from multiprocessing import cpu_count
+from multiprocessing import Pool
 
 # 2 - generate database schema
 Base.metadata.create_all(engine)
@@ -16,20 +19,25 @@ Base.metadata.create_all(engine)
 # 3 - create a new session
 session = Session()
 
-def create_dataframe(filepath):
-    json_pattern = os.path.join(filepath, '*.json')
-    file_list = glob(json_pattern)
+num_cores = cpu_count() - 1
 
+def read_json(json_files):
     json_list = []
-    #for file in tqdm(file_list, desc='Creating DataFrame'):
-    for i in tqdm(range(499), desc='Creating DataFrame'):
-        #with open (file) as f:
-        with open(file_list[i]) as f:
+    for file in tqdm(json_files, desc='Creating DataFrame'):
+        with open (file) as f:
             exp = json.load(f)
             json_list.append(exp)
 
     df = pd.DataFrame(json_list)
     return df
+
+def create_dataframe(filepath):
+    json_pattern = os.path.join(filepath, '*.json')
+    file_list = glob(json_pattern)
+    json_files = np.array_split(file_list, num_cores)
+    with Pool() as pool:
+        data = pd.concat(pool.map(read_json, json_files))
+    return data
 
 def create_catalog():
     for key, value in Country_Dict.items():
@@ -92,7 +100,8 @@ def load_data(df):
         session.flush()
     session.commit()
 
-df = create_dataframe('./datasets/')
-create_catalog()
-load_data(df)
-session.close()
+if __name__ == "__main__":
+    df = create_dataframe('./datasets/')
+    create_catalog()
+    load_data(df)
+    session.close()
