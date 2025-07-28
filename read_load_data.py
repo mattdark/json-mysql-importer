@@ -17,7 +17,7 @@ from multiprocessing import Pool
 Base.metadata.create_all(engine)
 
 # 3 - create a new session
-session = Session()
+#session = Session()
 
 num_cores = cpu_count() - 1
 
@@ -40,6 +40,7 @@ def create_dataframe(filepath):
     return data
 
 def create_catalog():
+    session = Session()
     for key, value in Country_Dict.items():
         country = Country(value, key)
         session.add(country)
@@ -49,8 +50,10 @@ def create_catalog():
         session.add(genre)
     
     session.commit()
+    session.close()
 
 def load_data(df):
+    session = Session()
     for row in tqdm (df.itertuples(), desc='Loading Data'):
         country = None
         if row.country in Country_Dict:
@@ -99,9 +102,11 @@ def load_data(df):
         session.merge(movie)
         session.flush()
     session.commit()
+    session.close()
 
 if __name__ == "__main__":
     df = create_dataframe('./datasets/')
+    chunks = np.array_split(df, num_cores)
     create_catalog()
-    load_data(df)
-    session.close()
+    with Pool() as pool:
+        pool.map(load_data, chunks)
